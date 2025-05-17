@@ -1,0 +1,525 @@
+/* 后台管理系统样式 - 现代化美化版 */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --admin-primary: #3a0ca3;
+    --admin-secondary: #4361ee;
+    --admin-accent: #4cc9f0;
+    --admin-danger: #f72585;
+    --admin-success: #4cc9f0;
+    --admin-warning: #f59e0b;
+    --admin-light: #f8f9fa;
+    --admin-dark: #212529;
+    --admin-gradient-1: linear-gradient(135deg, #3a0ca3, #4361ee);
+    --admin-gradient-2: linear-gradient(135deg, #f72585, #7209b7);
+    --admin-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --admin-shadow-md: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --admin-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --admin-border-radius: 12px;
+    --admin-transition: 0.3s ease;
+}
+
+/* 导航栏样式 */
+.admin-nav {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: var(--admin-border-radius);
+    padding: 15px;
+    box-shadow: var(--admin-shadow-md);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.admin-nav::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(67, 97, 238, 0.05) 0%, rgba(67, 97, 238, 0) 70%);
+    z-index: -1;
+}
+
+.nav-link {
+    padding: 10px 20px;
+    margin: 0 5px;
+    color: var(--admin-dark);
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all var(--admin-transition);
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: var(--admin-gradient-1);
+    transition: all 0.4s ease;
+    z-index: -1;
+    opacity: 0;
+    border-radius: 30px;
+}
+
+.nav-link:hover {
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: var(--admin-shadow-sm);
+}
+
+.nav-link:hover::before {
+    width: 100%;
+    opacity: 1;
+}
+
+.nav-link.active {
+    background: var(--admin-gradient-1);
+    color: white;
+    box-shadow: var(--admin-shadow-md);
+}
+
+/* 管理面板样式 */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    font-family: 'Poppins', 'Microsoft YaHei', Arial, sans-serif;
+    min-height: 100vh;
+    position: relative;
+    background-attachment: fixed;
+}
+
+.admin-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 30px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.admin-section {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: var(--admin-border-radius);
+    padding: 25px;
+    box-shadow: var(--admin-shadow-md);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all var(--admin-transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-section:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--admin-shadow-lg);
+}
+
+.admin-section h2 {
+    color: var(--admin-primary);
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    position: relative;
+}
+
+.admin-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: var(--admin-gradient-1);
+    border-radius: 10px;
+}
+
+/* 表单样式 */
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    transition: all var(--admin-transition);
+}
+
+.form-group label {
+    font-weight: 500;
+    color: var(--admin-dark);
+    font-size: 0.95rem;
+    margin-left: 5px;
+    transition: all var(--admin-transition);
+}
+
+.form-group input[type="text"],
+.form-group select {
+    padding: 12px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--admin-border-radius);
+    font-size: 16px;
+    transition: all var(--admin-transition);
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: var(--admin-shadow-sm);
+}
+
+.form-group input[type="text"]:hover,
+.form-group select:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.form-group input[type="text"]:focus,
+.form-group select:focus {
+    border-color: var(--admin-secondary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+    background-color: white;
+}
+
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background: var(--admin-gradient-1);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all var(--admin-transition);
+    box-shadow: var(--admin-shadow-sm);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4361ee, #4cc9f0);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--admin-shadow-md);
+}
+
+.btn-primary:hover::before {
+    opacity: 1;
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--admin-dark);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 12px 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all var(--admin-transition);
+    box-shadow: var(--admin-shadow-sm);
+}
+
+.btn-secondary:hover {
+    background-color: white;
+    transform: translateY(-3px);
+    box-shadow: var(--admin-shadow-md);
+    color: var(--admin-secondary);
+}
+
+/* 域名表格样式 */
+.domains-table-container {
+    overflow-x: auto;
+    border-radius: var(--admin-border-radius);
+    box-shadow: var(--admin-shadow-sm);
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+}
+
+.domains-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.domains-table th,
+.domains-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all var(--admin-transition);
+}
+
+.domains-table th {
+    background: var(--admin-gradient-1);
+    font-weight: 600;
+    color: white;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.domains-table th:first-child {
+    border-top-left-radius: var(--admin-border-radius);
+}
+
+.domains-table th:last-child {
+    border-top-right-radius: var(--admin-border-radius);
+}
+
+.domains-table tr:last-child td:first-child {
+    border-bottom-left-radius: var(--admin-border-radius);
+}
+
+.domains-table tr:last-child td:last-child {
+    border-bottom-right-radius: var(--admin-border-radius);
+}
+
+.domains-table tr:hover td {
+    background-color: rgba(255, 255, 255, 0.95);
+    transform: scale(1.01);
+}
+
+.domain-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--admin-dark);
+    transition: all var(--admin-transition);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-3px);
+    box-shadow: var(--admin-shadow-sm);
+}
+
+.edit-btn:hover {
+    color: var(--admin-secondary);
+}
+
+.delete-btn:hover {
+    color: var(--admin-danger);
+}
+
+/* 状态标签 */
+.status-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: var(--admin-shadow-sm);
+    transition: all var(--admin-transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.status-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+    z-index: -1;
+}
+
+.status-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--admin-shadow-md);
+}
+
+.status-badge:hover::before {
+    transform: translateX(0);
+}
+
+.status-up {
+    background: linear-gradient(135deg, #34d399, #10b981);
+    color: white;
+}
+
+.status-down {
+    background: linear-gradient(135deg, #f87171, #ef4444);
+    color: white;
+}
+
+.status-checking {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: white;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+
+.status-unknown {
+    background: linear-gradient(135deg, #94a3b8, #64748b);
+    color: white;
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #555;
+}
+
+/* 通知样式 */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+    display: none;
+}
+
+.notification-content {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 300px;
+}
+
+.notification-icon {
+    font-size: 20px;
+}
+
+.notification-success .notification-icon {
+    color: #2ecc71;
+}
+
+.notification-error .notification-icon {
+    color: #e74c3c;
+}
+
+.notification-message {
+    font-size: 16px;
+    color: #333;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .domains-table th,
+    .domains-table td {
+        padding: 8px 10px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+}

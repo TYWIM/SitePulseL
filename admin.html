@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SitePulseL - 后台管理</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container admin-container">
+        <header>
+            <h1>SitePulseL - 后台管理</h1>
+            <p class="subtitle">配置和管理您的监控域名</p>
+            <nav class="admin-nav">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> 返回前台</a>
+                <a href="admin.html" class="nav-link active"><i class="fas fa-cog"></i> 域名管理</a>
+            </nav>
+        </header>
+        
+        <div class="admin-panel">
+            <div class="admin-section">
+                <h2><i class="fas fa-plus-circle"></i> 添加新域名</h2>
+                <form id="domainForm" class="admin-form">
+                    <div class="form-group">
+                        <label for="domainName">域名地址</label>
+                        <input type="text" id="domainName" placeholder="例如: example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="displayName">显示名称</label>
+                        <input type="text" id="displayName" placeholder="例如: 示例网站">
+                    </div>
+                    <div class="form-group">
+                        <label for="checkInterval">检测间隔 (分钟)</label>
+                        <select id="checkInterval">
+                            <option value="1">1 分钟</option>
+                            <option value="5" selected>5 分钟</option>
+                            <option value="10">10 分钟</option>
+                            <option value="30">30 分钟</option>
+                            <option value="60">1 小时</option>
+                        </select>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="enableClickthrough" checked>
+                        <label for="enableClickthrough">允许点击访问网站</label>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="enableNotifications" checked>
+                        <label for="enableNotifications">启用状态变更通知</label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary"><i class="fas fa-save"></i> 保存域名</button>
+                        <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> 重置</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="admin-section">
+                <h2><i class="fas fa-list"></i> 域名管理列表</h2>
+                <div class="domains-table-container">
+                    <table class="domains-table">
+                        <thead>
+                            <tr>
+                                <th>显示名称</th>
+                                <th>域名地址</th>
+                                <th>检测间隔</th>
+                                <th>点击访问</th>
+                                <th>状态通知</th>
+                                <th>当前状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="domainTableBody">
+                            <!-- 域名列表将通过JavaScript动态生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>编辑域名</h2>
+                <form id="editDomainForm" class="admin-form">
+                    <input type="hidden" id="editDomainId">
+                    <div class="form-group">
+                        <label for="editDomainName">域名地址</label>
+                        <input type="text" id="editDomainName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editDisplayName">显示名称</label>
+                        <input type="text" id="editDisplayName">
+                    </div>
+                    <div class="form-group">
+                        <label for="editCheckInterval">检测间隔 (分钟)</label>
+                        <select id="editCheckInterval">
+                            <option value="1">1 分钟</option>
+                            <option value="5">5 分钟</option>
+                            <option value="10">10 分钟</option>
+                            <option value="30">30 分钟</option>
+                            <option value="60">1 小时</option>
+                        </select>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="editEnableClickthrough">
+                        <label for="editEnableClickthrough">允许点击访问网站</label>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="editEnableNotifications">
+                        <label for="editEnableNotifications">启用状态变更通知</label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary"><i class="fas fa-save"></i> 更新域名</button>
+                        <button type="button" id="cancelEdit" class="btn-secondary"><i class="fas fa-times"></i> 取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 SitePulseL | <a href="https://github.com/" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
+    
+    <!-- 加载指示器 -->
+    <div id="loadingIndicator" class="loading-indicator">
+        <div class="spinner"></div>
+        <div class="loading-text">加载中...</div>
+    </div>
+
+    <!-- 通知提示 -->
+    <div id="notification" class="notification">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-message"></span>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

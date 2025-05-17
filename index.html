@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SitePulseL</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modal-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SitePulseL</h1>
+            <p class="subtitle">实时监控您的网站可访问性</p>
+        </header>
+        
+        <div class="status-overview" id="statusCount">
+            <!-- 状态统计将通过JavaScript动态生成 -->
+        </div>
+        
+
+
+        <div class="domains-container">
+            <h2>监控列表</h2>
+            <div class="domains-header">
+                <div class="domain-item header">
+                    <div class="domain-name">域名</div>
+                    <div class="domain-status">状态</div>
+                    <div class="domain-latency">延迟</div>
+                    <div class="domain-uptime">运行时间</div>
+                    <div class="domain-actions">操作</div>
+                </div>
+            </div>
+            <div id="domainsList">
+                <!-- 域名列表将通过JavaScript动态生成 -->
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 SitePulseL | <a href="https://github.com/" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
+    
+    <!-- 加载指示器 -->
+    <div id="loadingIndicator" class="loading-indicator">
+        <div class="spinner"></div>
+        <div class="loading-text">加载中...</div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
