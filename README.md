@@ -42,9 +42,9 @@ npm run dev
 
 > 服务器将在 http://localhost:3000 启动
 
-### 操作指南
+### 后台操作指南
 
-1. 访问 http://localhost:3000
+1. 访问 http://localhost:3000/admin.html
 2. 输入要监控的域名（如：`www.cxaim.com`）
 3. 点击"添加域名"按钮或按回车键
 4. 系统自动检测并显示域名状态
